@@ -20,8 +20,8 @@ int main(int argc, char* argv[]) {
           .Append<userver::components::HttpClient>()
           .Append<userver::server::handlers::TestsControl>();
 
-  pg_grpc_service_template::AppendHello(component_list);
-  pg_grpc_service_template::AppendHelloClient(component_list);
+  warehouse_api::AppendHello(component_list);
+  warehouse_api::AppendHelloClient(component_list);
 
   return userver::utils::DaemonMain(argc, argv, component_list);
 }
