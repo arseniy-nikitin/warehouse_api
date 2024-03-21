@@ -7,9 +7,6 @@
 #include <userver/ugrpc/server/server_component.hpp>
 #include <userver/utils/daemon_run.hpp>
 
-#include "hello.hpp"
-#include "hello_client.hpp"
-
 int main(int argc, char* argv[]) {
   auto component_list =
       userver::components::MinimalServerComponentList()
@@ -19,9 +16,5 @@ int main(int argc, char* argv[]) {
           .Append<userver::components::TestsuiteSupport>()
           .Append<userver::components::HttpClient>()
           .Append<userver::server::handlers::TestsControl>();
-
-  warehouse_api::AppendHello(component_list);
-  warehouse_api::AppendHelloClient(component_list);
-
   return userver::utils::DaemonMain(argc, argv, component_list);
 }

@@ -27,7 +27,13 @@ target_link_libraries(${PROJECT_NAME}_objs PUBLIC userver-postgresql)
 
 # Create a proto library with userver extensions
 include(GrpcTargets)
-userver_add_grpc_library(${PROJECT_NAME}_proto PROTOS handlers/hello.proto)
+userver_add_grpc_library(${PROJECT_NAME}_proto PROTOS
+    handlers/courier.proto
+    handlers/delivery_report.proto
+    handlers/order.proto
+    handlers/product.proto
+    handlers/warehouse.proto
+)
 target_link_libraries(${PROJECT_NAME}_objs PUBLIC ${PROJECT_NAME}_proto)
 
 

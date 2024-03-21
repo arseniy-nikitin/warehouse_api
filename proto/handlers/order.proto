@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package order.api;
+
+message Order {
+	int32 id = 1;
+	int32 product_id = 2;
+	int32 courier_id = 3;
+	string customer_name = 4;
+	string customer_address = 5;
+	string customer_phone = 6;
+	string customer_email = 7;
+	string payment_method = 8;
+	string order_status = 9;
+	string delivery_date = 10; // DATE YYYY-MM-DD
+	string delivery_period_start = 11; // TIME HH:MM:SS
+	string delivery_period_end = 12; // TIME HH:MM:SS
+	string area = 13;
+}
+
+service OrderService {
+        rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse) {}
+        rpc GetOrder(GetOrderRequest) returns (GetOrderResponse) {}
+        rpc ListOrders(ListOrdersRequest) returns (ListOrdersResponse) {}
+}
+
+message CreateOrderRequest {
+        int32 product_id = 1;
+        int32 courier_id = 2;
+        string customer_name = 3;
+        string customer_address = 4;
+        string customer_phone = 5;
+        string customer_email = 6;
+        string payment_method = 7;
+        string order_status = 8;
+        string delivery_date = 9; // DATE YYYY-MM-DD
+        string delivery_period_start = 10; // TIME HH:MM:SS
+        string delivery_period_end = 11; // TIME HH:MM:SS
+        string area = 12;
+}
+
+message CreateOrderResponse {
+        int32 id = 1;
+}
+
+message GetOrderRequest {
+        int32 id = 1;
+}
+
+message GetOrderResponse {
+        Order order = 1;
+}
+
+message ListOrdersRequest {
+        int32 offset = 1;
+        int32 limit = 2;
+}
+
+message ListOrdersResponse {
+        repeated Order orders = 1;
+}

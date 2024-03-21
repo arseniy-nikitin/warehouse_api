@@ -5,7 +5,5 @@ logger-level: debug
 
 is-testing: true
 
-hello-endpoint: '[::1]:8081'
-
 # warehouse_api_db-1 is the service name + _ + filename of the db_1.sql
-dbconnection: 'postgresql://testsuite@localhost:15433/warehouse_api_db_1'
+dbconnection: 'postgresql://testsuite@localhost:15433/warehouse_api_db_main'

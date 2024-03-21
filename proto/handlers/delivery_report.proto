@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package delivery_report.api;
+
+message DeliveryReport { 
+	int32 id = 1;
+	int32 order_id = 2;
+	string delivery_timestamp = 3; // TIMESTAMP YYYY-MM-DD HH:MM:SS
+	string description = 4;
+}
+
+service DeliveryReportService { 
+        rpc CreateDeliveryReport(CreateDeliveryReportRequest) returns (CreateDeliveryReportResponse) {}
+        rpc GetDeliveryReport(GetDeliveryReportRequest) returns (GetDeliveryReportResponse) {}
+        rpc ListDeliveryReports(ListDeliveryReportsRequest) returns (ListDeliveryReportsResponse) {}
+}
+
+message CreateDeliveryReportRequest {
+        int32 order_id = 1;
+        string delivery_timestamp = 2; // TIMESTAMP YYYY-MM-DD HH:MM:SS
+        string description = 3;
+}
+
+message CreateDeliveryReportResponse { 
+        int32 id = 1;
+}
+
+message GetDeliveryReportRequest { 
+        int32 id = 1;
+}
+
+message GetDeliveryReportResponse { 
+        DeliveryReport delivery_report = 1;
+}
+
+message ListDeliveryReportsRequest { 
+        int32 offset = 1;
+        int32 limit = 2;
+}
+
+message ListDeliveryReportsResponse { 
+        repeated DeliveryReport delivery_reports = 1;
+}

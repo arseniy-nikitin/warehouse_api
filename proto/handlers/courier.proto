@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package courier.api;
+
+message Courier {
+	int32 id = 1;
+	string name = 2;
+	string area = 3;
+	string courier_type = 4;
+	string working_hours_start = 5; // TIME HH:MM:SS
+	string working_hours_end = 6; // TIME HH:MM:SS
+}
+
+service CourierService {
+        rpc CreateCourier(CreateCourierRequest) returns (CreateCourierResponse) {}
+        rpc GetCourier(GetCourierRequest) returns (GetCourierResponse) {}
+        rpc ListCouriers(ListCouriersRequest) returns (ListCouriersResponse) {}
+}
+
+message CreateCourierRequest {
+        string name = 1;
+        string area = 2;
+        string courier_type = 3;
+        string working_hours_start = 4; // TIME HH:MM:SS
+        string working_hours_end = 5; // TIME HH:MM:SS
+}
+
+message CreateCourierResponse {
+        int32 id = 1;
+}
+
+message GetCourierRequest {
+        int32 id = 1;
+}
+
+message GetCourierResponse {
+        Courier courier = 1;
+}
+
+message ListCouriersRequest {
+        int32 offset = 1;
+        int32 limit = 2;
+}
+
+message ListCouriersResponse {
+        repeated Courier couriers = 1;
+}

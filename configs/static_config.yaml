@@ -22,16 +22,58 @@ components_manager:
             # https://grpc.github.io/grpc/core/group__grpc__arg__keys.html
             channel-args: {}
 
-        handler-hello:
+        handlers:
+            warehouse:
+                service: warehouse.api.WarehouseService
+                endpoint: ${grpc.server.address}
 
-        hello-client:
-            endpoint: $hello-endpoint
+            courier:
+                service: courier.api.CourierService
+                endpoint: ${grpc.server.address}
 
-        grpc-server:
-            port: 8081
-            service-defaults:
-                middlewares: []
-                task-processor: main-task-processor
+            delivery_report:
+                service: delivery_report.api.DeliveryReportService
+                endpoint: ${grpc.server.address}
+
+            order:
+                service: order.api.OrderService
+                endpoint: ${grpc.server.address}
+
+            product:
+                service: product.api.ProductService
+                endpoint: ${grpc.server.address}
+
+        clients:
+            warehouse:
+                service: warehouse.api.WarehouseService
+                endpoint: ${handlers.warehouse.endpoint}
+
+            courier:
+                service: courier.api.CourierService
+                endpoint: ${handlers.courier.endpoint}
+
+            delivery_report:
+                service: delivery_report.api.DeliveryReportService
+                endpoint: ${handlers.delivery_report.endpoint}
+
+            order:
+                service: order.api.OrderService
+                endpoint: ${handlers.order.endpoint}
+
+            product:
+                service: product.api.ProductService
+                endpoint: ${handlers.product.endpoint}
+
+        grpc:
+            server:
+                address: 0.0.0.0:8081
+                service-defaults:
+                    middlewares: []
+                    task-processor: main-task-processor
+
+        handlers-config:
+            warehouse:
+                endpoint: ${grpc.server.address}
 
         server:
             listener:                 # configuring the main listening socket...
@@ -74,7 +116,7 @@ components_manager:
             throttling_enabled: false
             url_trailing_slash: strict-match
 
-        postgres-db-1:
+        postgres-db-main:
             dbconnection: $dbconnection
             blocking_task_processor: fs-task-processor
             dns_resolver: async

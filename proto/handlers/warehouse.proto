@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package warehouse.api;
+
+message Warehouse {
+    int32 id = 1;
+    string address = 2;
+    string area = 3;
+}
+
+service WarehouseService {
+    rpc CreateWarehouse(CreateWarehouseRequest) returns (CreateWarehouseResponse) {}
+    rpc GetWarehouse(GetWarehouseRequest) returns (GetWarehouseResponse) {}
+    rpc ListWarehouses(ListWarehousesRequest) returns (ListWarehousesResponse) {}
+}
+
+message CreateWarehouseRequest {
+    string address = 1;
+    string area = 2;
+}
+
+message CreateWarehouseResponse {
+    int32 id = 1;
+}
+
+message GetWarehouseRequest {
+    int32 id = 1;
+}
+
+message GetWarehouseResponse {
+    Warehouse warehouse = 1;
+}
+
+message ListWarehousesRequest {
+    int32 offset = 1;
+    int32 limit = 2;
+}
+
+message ListWarehousesResponse {
+    repeated Warehouse warehouses = 1;
+}

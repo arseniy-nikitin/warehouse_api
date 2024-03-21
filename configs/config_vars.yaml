@@ -8,6 +8,4 @@ is-testing: false
 server-port: 8080
 server-grpc-port: 8081
 
-hello-endpoint: '[::1]:8081'
-
-dbconnection: 'postgresql://warehouse_api_user:password@localhost:5432/warehouse_api_db_1'
+dbconnection: 'postgresql://warehouse_api_user:password@localhost:5432/warehouse_api_db_main'
